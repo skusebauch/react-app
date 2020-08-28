@@ -5,10 +5,22 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
+      { name: "Sven", age: 29 },
+      { name: "Leon", age: 22 },
       { name: "Eileen", age: 29 },
     ],
+  };
+
+  // Event Handler
+  switchNameHandler = () => {
+    //console.log("Was clicked");
+    this.setState({
+      persons: [
+        { name: "Sven Kusebauch", age: 29 },
+        { name: "Leon Mooy", age: 22 },
+        { name: "Eileen Mooy", age: 29 },
+      ],
+    });
   };
 
   render() {
@@ -16,7 +28,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi I am a React-App</h1>
         <p>this is really working</p>
-        <button>Switch Name</button>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
