@@ -5,31 +5,54 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Stephanie", age: 26 },
+      { name: "Sven", age: 28 },
+      { name: "Leon", age: 24 },
+      { name: "Eileen", age: 29 },
     ],
     otherState: "some other value",
   };
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     // console.log('Was clicked!');
     // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
     this.setState({
       persons: [
-        { name: "Maximilian", age: 28 },
-        { name: "Manu", age: 29 },
-        { name: "Stephanie", age: 27 },
+        { name: newName, age: 29 },
+        { name: "Leon Mooy", age: 24 },
+        { name: "Eileen Mooy", age: 29 },
+      ],
+    });
+  };
+
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: "Sven", age: 29 },
+        { name: event.target.value, age: 24 },
+        { name: "Eileen Mooy", age: 29 },
       ],
     });
   };
 
   render() {
+    const style = {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+    };
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <button
+          style={style}
+          onClick={() => this.switchNameHandler("Sven Kusebauch!!")}
+        >
+          Switch Name
+        </button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
@@ -37,6 +60,8 @@ class App extends Component {
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, "Sven Kusebauch!")}
+          changed={this.nameChangedHandler}
         >
           My Hobbies: Racing
         </Person>
