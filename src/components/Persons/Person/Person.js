@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import classes from "./Person.css";
 import Aux from "../../../hoc/Aux";
 import WithClass from "../../../hoc/WithClass";
+import AuthContext from "../../../context/auth-context";
 
 const person = (props) => {
   return (
     <WithClass classes={classes.Person}>
+      <AuthContext.Consumer>
+        {(context) =>
+          context.authenticated ? <p>Authenticated!</p> : <p>Please Login!</p>
+        }
+      </AuthContext.Consumer>
       <p onClick={props.click}>
         I am {props.name} and I am {props.age} years old!
       </p>
